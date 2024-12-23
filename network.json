@@ -1,0 +1,142 @@
+[
+    [
+        {
+            "available_bandwidth": 1459.24,
+            "communication_latency": 0.07
+        },
+        {
+            "available_bandwidth": 9394.36,
+            "communication_latency": 0.08
+        },
+        {
+            "available_bandwidth": 841.75,
+            "communication_latency": 0.08
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 8540.81,
+            "communication_latency": 0.18
+        },
+        {
+            "available_bandwidth": 5126.94,
+            "communication_latency": 0.06
+        },
+        {
+            "available_bandwidth": 773.16,
+            "communication_latency": 0.19
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 5360.97,
+            "communication_latency": 0.11
+        },
+        {
+            "available_bandwidth": 4524.83,
+            "communication_latency": 0.17
+        },
+        {
+            "available_bandwidth": 2335.55,
+            "communication_latency": 0.18
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 6146.07,
+            "communication_latency": 0.08
+        },
+        {
+            "available_bandwidth": 7957.19,
+            "communication_latency": 0.16
+        },
+        {
+            "available_bandwidth": 7309.8,
+            "communication_latency": 0.11
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 5862.33,
+            "communication_latency": 0.04
+        },
+        {
+            "available_bandwidth": 3143.08,
+            "communication_latency": 0.07
+        },
+        {
+            "available_bandwidth": 5204.02,
+            "communication_latency": 0.08
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 1771.56,
+            "communication_latency": 0.04
+        },
+        {
+            "available_bandwidth": 6456.33,
+            "communication_latency": 0.05
+        },
+        {
+            "available_bandwidth": 9675.44,
+            "communication_latency": 0.04
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 7568.77,
+            "communication_latency": 0.1
+        },
+        {
+            "available_bandwidth": 5337.14,
+            "communication_latency": 0.08
+        },
+        {
+            "available_bandwidth": 1375.74,
+            "communication_latency": 0.15
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 3351.35,
+            "communication_latency": 0.17
+        },
+        {
+            "available_bandwidth": 1077.56,
+            "communication_latency": 0.17
+        },
+        {
+            "available_bandwidth": 3170.94,
+            "communication_latency": 0.13
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 9001.55,
+            "communication_latency": 0.04
+        },
+        {
+            "available_bandwidth": 2017.61,
+            "communication_latency": 0.17
+        },
+        {
+            "available_bandwidth": 5370.64,
+            "communication_latency": 0.02
+        }
+    ],
+    [
+        {
+            "available_bandwidth": 8086.98,
+            "communication_latency": 0.13
+        },
+        {
+            "available_bandwidth": 1076.98,
+            "communication_latency": 0.08
+        },
+        {
+            "available_bandwidth": 3637.54,
+            "communication_latency": 0.1
+        }
+    ]
+]

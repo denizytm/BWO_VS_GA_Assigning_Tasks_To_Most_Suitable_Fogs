@@ -1,0 +1,26 @@
+[
+    {
+        "total_cpu_capacity": 6079717.52,
+        "total_memory_capacity": 44.99,
+        "total_bandwith_capacity": 717,
+        "idle_power_consumption": 30.89,
+        "active_power_consumption": 0.51,
+        "usage_cost": 0.14
+    },
+    {
+        "total_cpu_capacity": 616203809.05,
+        "total_memory_capacity": 109.18,
+        "total_bandwith_capacity": 2121,
+        "idle_power_consumption": 5.28,
+        "active_power_consumption": 0.27,
+        "usage_cost": 0.38
+    },
+    {
+        "total_cpu_capacity": 466804359.35,
+        "total_memory_capacity": 111.23,
+        "total_bandwith_capacity": 2012,
+        "idle_power_consumption": 6.21,
+        "active_power_consumption": 0.19,
+        "usage_cost": 0.37
+    }
+]
