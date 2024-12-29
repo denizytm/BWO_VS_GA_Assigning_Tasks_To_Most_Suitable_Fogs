@@ -14,3 +14,4 @@ def load_datas_from_file(filename: str) -> List[Fog | Task | Network]:
     except FileNotFoundError:
         print(f"Error: The file {filename} was not found.")
         raise
+

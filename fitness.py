@@ -69,24 +69,5 @@ def fitness_func(solution):
                 penalty += 1
 
         U /= len(fogs)
-
-        E_values.append(E)
-        L_values.append(L)
-        U_values.append(U)
-        C_values.append(C)
-    
-        # Minimum ve maksimumları hesapla
-        E_min, E_max = min(E_values), max(E_values)
-        L_min, L_max = min(L_values), max(L_values)
-        U_min, U_max = min(U_values), max(U_values)
-        C_min, C_max = min(C_values), max(C_values)
-    
-        # Normalizasyon
-        E_normalized = (E - E_min) / (E_max - E_min) if E_max != E_min else 0.5
-        L_normalized = (L - L_min) / (L_max - L_min) if L_max != L_min else 0.5
-        U_normalized = (U - U_min) / (U_max - U_min) if U_max != U_min else 0.5
-        C_normalized = (C - C_min) / (C_max - C_min) if C_max != C_min else 0.5
-
-        """ print(E_normalized,L_normalized,U_normalized,C_normalized)  """
-
-        return 1 * E_normalized + 1 * L_normalized - 1 * U_normalized + 1 * C_normalized + penalty
+        
+        return 1 * E + 1 * L - 1 * U + 1 * C + penalty

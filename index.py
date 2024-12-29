@@ -15,6 +15,14 @@ from file_functions import load_datas_from_file, save_datas_to_file
 from fitness import fitness_func 
 
 try:
+
+    tasks = generate_random_tasks(10)
+    fogs = generate_random_fogs(3)
+    network = generate_random_network(len(tasks),len(fogs))
+    save_datas_to_file(tasks, "tasks.json")
+    save_datas_to_file(fogs, "fogs.json")
+    save_datas_to_file(network, "network.json") 
+
     tasks : List[Task] = load_datas_from_file("tasks.json")
     fogs : List[Fog] = load_datas_from_file("fogs.json")
     network : List[List[Network]] = load_datas_from_file("network.json")
@@ -29,7 +37,7 @@ try:
     optimizer = GA.BaseGA(epoch=100, pop_size=100, pc=0.9, pm=0.2)
     optimizer.solve(problem_dict)
     print(optimizer.g_best.solution)
-    print(optimizer.g_best.target.fitness)  
+    print(optimizer.g_best.target.fitness)   
 
 except FileNotFoundError:
     tasks = generate_random_tasks(10)

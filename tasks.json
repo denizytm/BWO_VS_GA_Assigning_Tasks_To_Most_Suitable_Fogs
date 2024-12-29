@@ -1,82 +1,82 @@
 [
     {
-        "cpu_demand": 442549.97,
-        "memory_demand": 2562.66,
-        "bandwidth_demand": 647,
-        "deadline": 3.59,
-        "data_size": 476.41,
-        "priority_level": 1
+        "cpu_demand": 0.015066546546546546,
+        "memory_demand": 0.145992992992993,
+        "bandwidth_demand": 0.4904904904904905,
+        "deadline": 0.35918367346938773,
+        "data_size": 0.3647129425885177,
+        "priority_level": 0.4444444444444444
     },
     {
-        "cpu_demand": 627410.37,
-        "memory_demand": 1173.91,
-        "bandwidth_demand": 952,
-        "deadline": 0.9,
-        "data_size": 121.48,
-        "priority_level": 7
+        "cpu_demand": 0.4662607607607608,
+        "memory_demand": 0.5811241241241242,
+        "bandwidth_demand": 0.7107107107107107,
+        "deadline": 0.17959183673469387,
+        "data_size": 0.4183036607321465,
+        "priority_level": 0.2222222222222222
     },
     {
-        "cpu_demand": 863492.82,
-        "memory_demand": 3266.43,
-        "bandwidth_demand": 930,
-        "deadline": 0.79,
-        "data_size": 86.36,
-        "priority_level": 5
+        "cpu_demand": 0.6291165765765765,
+        "memory_demand": 0.5662522522522522,
+        "bandwidth_demand": 0.47647647647647645,
+        "deadline": 0.12244897959183672,
+        "data_size": 0.21652330466093223,
+        "priority_level": 0.1111111111111111
     },
     {
-        "cpu_demand": 640479.95,
-        "memory_demand": 4670.31,
-        "bandwidth_demand": 972,
-        "deadline": 3.87,
-        "data_size": 335.23,
-        "priority_level": 9
+        "cpu_demand": 0.3226516016016016,
+        "memory_demand": 0.31599899899899897,
+        "bandwidth_demand": 0.05005005005005005,
+        "deadline": 0.004081632653061222,
+        "data_size": 0.8595319063812762,
+        "priority_level": 0.6666666666666666
     },
     {
-        "cpu_demand": 710714.92,
-        "memory_demand": 2812.14,
-        "bandwidth_demand": 642,
-        "deadline": 2.28,
-        "data_size": 290.1,
-        "priority_level": 2
+        "cpu_demand": 0.753805995995996,
+        "memory_demand": 0.04756056056056056,
+        "bandwidth_demand": 0.5645645645645646,
+        "deadline": 0.012244897959183673,
+        "data_size": 0.9894378875775156,
+        "priority_level": 0.2222222222222222
     },
     {
-        "cpu_demand": 537960.85,
-        "memory_demand": 5714.67,
-        "bandwidth_demand": 122,
-        "deadline": 4.99,
-        "data_size": 54.12,
-        "priority_level": 3
+        "cpu_demand": 0.3724445445445445,
+        "memory_demand": 0.5172612612612613,
+        "bandwidth_demand": 0.6696696696696697,
+        "deadline": 0.9428571428571428,
+        "data_size": 0.054250850170034004,
+        "priority_level": 0.0
     },
     {
-        "cpu_demand": 183402.72,
-        "memory_demand": 5966.84,
-        "bandwidth_demand": 592,
-        "deadline": 1.13,
-        "data_size": 365.52,
-        "priority_level": 2
+        "cpu_demand": 0.8379923923923924,
+        "memory_demand": 0.4135765765765766,
+        "bandwidth_demand": 0.42542542542542544,
+        "deadline": 0.42857142857142855,
+        "data_size": 0.859011802360472,
+        "priority_level": 0.2222222222222222
     },
     {
-        "cpu_demand": 368893.55,
-        "memory_demand": 4855.21,
-        "bandwidth_demand": 285,
-        "deadline": 0.15,
-        "data_size": 103.22,
-        "priority_level": 8
+        "cpu_demand": 0.5158457657657658,
+        "memory_demand": 1.0094074074074073,
+        "bandwidth_demand": 0.93993993993994,
+        "deadline": 0.5489795918367346,
+        "data_size": 0.9258651730346069,
+        "priority_level": 0.2222222222222222
     },
     {
-        "cpu_demand": 317654.17,
-        "memory_demand": 10218.89,
-        "bandwidth_demand": 534,
-        "deadline": 0.91,
-        "data_size": 5.79,
-        "priority_level": 8
+        "cpu_demand": 0.05960571571571572,
+        "memory_demand": 0.034068068068068065,
+        "bandwidth_demand": 0.977977977977978,
+        "deadline": 0.3408163265306122,
+        "data_size": 0.4014002800560112,
+        "priority_level": 0.2222222222222222
     },
     {
-        "cpu_demand": 598001.27,
-        "memory_demand": 4294.42,
-        "bandwidth_demand": 747,
-        "deadline": 1.26,
-        "data_size": 6.67,
-        "priority_level": 3
+        "cpu_demand": 0.1290304904904905,
+        "memory_demand": 0.3045105105105105,
+        "bandwidth_demand": 0.07307307307307308,
+        "deadline": 0.2632653061224489,
+        "data_size": 0.06919383876775355,
+        "priority_level": 0.0
     }
 ]
