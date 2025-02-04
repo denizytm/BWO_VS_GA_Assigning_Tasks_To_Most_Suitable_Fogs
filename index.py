@@ -10,7 +10,8 @@ from generator_functions import (
     generate_random_tasks
 )
 
-from file_functions import load_datas_from_file, save_datas_to_file 
+from file_functions import load_datas_from_file, save_datas_to_file, delete_files 
+
 
 try:
 
@@ -33,11 +34,33 @@ try:
     print(optimizer.g_best.solution)
     print(optimizer.g_best.target.fitness)   
 
+    import matplotlib.pyplot as plt
+
+    global_best_values = optimizer.history.list_global_best_fit
+    current_best_values = optimizer.history.list_current_best_fit
+
+    # X
+    epochs = list(range(1, len(global_best_values) + 1))
+
+    plt.figure(figsize=(10, 5))
+
+    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness") 
+
+    """ plt.plot(epochs, current_best_values, marker='s', linestyle='--', color='r', label="Current Best Fitness") """
+
+    plt.xlabel("Epoch")
+    plt.ylabel("Fitness Değeri")
+    plt.title("Global Best Fitness")
+    plt.legend()
+    plt.grid()
+
+    plt.show()
+
 except FileNotFoundError:
-    tasks = generate_random_tasks(10)
+    tasks = generate_random_tasks(150)
     save_datas_to_file(tasks, "tasks.json")
     print(f"{len(tasks)} tasks created and saved.")
-    fogs = generate_random_fogs(3)
+    fogs = generate_random_fogs(10)
     save_datas_to_file(fogs, "fogs.json")
     print(f"{len(fogs)} fogs created and saved.")
     network = generate_random_network(len(tasks),len(fogs))

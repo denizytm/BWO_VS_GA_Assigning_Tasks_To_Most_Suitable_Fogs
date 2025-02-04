@@ -1,5 +1,6 @@
 
 import json
+import os
 from typing import List
 from types_1 import Task,Fog,Network
 
@@ -15,3 +16,8 @@ def load_datas_from_file(filename: str) -> List[Fog | Task | Network]:
         print(f"Error: The file {filename} was not found.")
         raise
 
+def delete_files() -> None:
+    files = ["tasks.json", "network.json", "fogs.json"]
+    
+    for file in files:
+        os.remove(file)

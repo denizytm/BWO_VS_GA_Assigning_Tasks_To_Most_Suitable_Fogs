@@ -13,7 +13,7 @@ def generate_random_tasks(count: int) -> List[Task]:
     for _ in range(count):
         task = Task(
             cpu_demand = normalize(round(random.uniform(10**3, 10**6), 2),10**3,10**6),
-            memory_demand = normalize(round(random.uniform(10, 10 * 1024), 2),(10),10000),
+            memory_demand = normalize(round(random.uniform(10, 10000), 2),(10),10000),
             bandwidth_demand = normalize(random.randint(1, 1000),1,1000),
             deadline = normalize(round(random.uniform(0.1, 5), 2),0.1,5),
             data_size =  normalize(round(random.uniform(0.1, 500), 2),0.1,500),
