@@ -1,8 +1,12 @@
 
 from mealpy import IntegerVar, GA
+from mealpy.swarm_based import PSO
+from mealpy.swarm_based import GWO
 import numpy as np
 from typing import List
 from types_1 import Task, Fog, Network 
+
+from bwo import BWO
 
 from generator_functions import (
     generate_random_fogs,
@@ -29,8 +33,20 @@ try:
         "minmax": "min",
     }
 
-    optimizer = GA.BaseGA(epoch=100, pop_size=100, pc=0.9, pm=0.2)
-    optimizer.solve(problem_dict)
+    bwo_example = BWO(pop_size=100,dim=len(tasks),max_epoch=3000,cross_p=0.8,mutation_p=0.05,canni_p=0.5,nr=10)
+
+    bwo_example.selection() 
+
+    #GA
+    optimizer = GA.BaseGA(epoch=3000, pop_size=100, pc=0.8, pm=0.05)
+
+    #PSO 522
+    #optimizer = PSO.OriginalPSO(epoch=1000, pop_size=100,c1=1,c2=2,w=0.4)
+    
+    #GWO 
+    #optimizer = GWO.OriginalGWO(epoch=500, pop_size=100)
+
+    """ optimizer.solve(problem_dict)
     print(optimizer.g_best.solution)
     print(optimizer.g_best.target.fitness)   
 
@@ -44,17 +60,17 @@ try:
 
     plt.figure(figsize=(10, 5))
 
-    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness") 
+    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness")   """
 
-    """ plt.plot(epochs, current_best_values, marker='s', linestyle='--', color='r', label="Current Best Fitness") """
+    """ plt.plot(epochs, current_best_values, marker='s', linestyle='--', color='r', label="Current Best Fitness") """ 
 
-    plt.xlabel("Epoch")
+    """ plt.xlabel("Epoch")
     plt.ylabel("Fitness Değeri")
     plt.title("Global Best Fitness")
     plt.legend()
     plt.grid()
 
-    plt.show()
+    plt.show()  """
 
 except FileNotFoundError:
     tasks = generate_random_tasks(150)

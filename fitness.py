@@ -4,6 +4,7 @@ from typing import List
 from types_1 import Task, Fog, Network
 from sklearn.preprocessing import StandardScaler
 import numpy as np
+import math
 
 tasks : List[Task] = load_datas_from_file("tasks.json")
 fogs : List[Fog] = load_datas_from_file("fogs.json")
@@ -15,6 +16,8 @@ U_values = []
 C_values = []
 
 def fitness_func(solution):
+        
+        solution = [math.floor(data) for data in solution]
 
         penalty = 0
 
@@ -64,7 +67,7 @@ def fitness_func(solution):
             if(
                 task.get('deadline') 
                 < 
-                ( (network[i][j]).get('communication_latency') + (task.get('cpu_demand') / fog.get('total_cpu_capacity')) + 1 ) 
+                ( (network[i][j]).get('communication_latency') + (task.get('cpu_demand') / fog.get('total_cpu_capacity')) ) 
             ):
                 penalty += 1
 
