@@ -18,7 +18,7 @@ from file_functions import load_datas_from_file, save_datas_to_file, delete_file
 
 
 try:
-
+    
     tasks : List[Task] = load_datas_from_file("tasks.json")
     fogs : List[Fog] = load_datas_from_file("fogs.json")
     network : List[List[Network]] = load_datas_from_file("network.json")
@@ -33,9 +33,9 @@ try:
         "minmax": "min",
     }
 
-    bwo_example = BWO(pop_size=100,dim=len(tasks),max_epoch=3000,cross_p=0.8,mutation_p=0.05,canni_p=0.5,nr=10)
+    bwo_example = BWO(pop_size=100,dim=len(tasks),max_epoch=3000,reproduction_p=0.8,mutation_p=0.4,canni_p=0.5) 
 
-    bwo_example.selection() 
+    bwo_example.selection()  
 
     #GA
     optimizer = GA.BaseGA(epoch=3000, pop_size=100, pc=0.8, pm=0.05)
@@ -60,23 +60,23 @@ try:
 
     plt.figure(figsize=(10, 5))
 
-    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness")   """
+    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness")    """
 
-    """ plt.plot(epochs, current_best_values, marker='s', linestyle='--', color='r', label="Current Best Fitness") """ 
+    """ plt.plot(epochs, current_best_values, marker='s', linestyle='--', color='r', label="Current Best Fitness")  """
 
     """ plt.xlabel("Epoch")
     plt.ylabel("Fitness Değeri")
     plt.title("Global Best Fitness")
     plt.legend()
-    plt.grid()
+    plt.grid() 
 
     plt.show()  """
-
+ 
 except FileNotFoundError:
-    tasks = generate_random_tasks(150)
+    tasks = generate_random_tasks(50)
     save_datas_to_file(tasks, "tasks.json")
     print(f"{len(tasks)} tasks created and saved.")
-    fogs = generate_random_fogs(10)
+    fogs = generate_random_fogs(7)
     save_datas_to_file(fogs, "fogs.json")
     print(f"{len(fogs)} fogs created and saved.")
     network = generate_random_network(len(tasks),len(fogs))

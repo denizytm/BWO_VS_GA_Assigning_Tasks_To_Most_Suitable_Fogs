@@ -1,82 +1,58 @@
 [
     {
-        "total_cpu_capacity": 0.3624605997597598,
-        "total_memory_capacity": 0.8725984251968504,
-        "total_bandwith_capacity": 0.7868686868686868,
-        "idle_power_consumption": 0.2526666666666667,
-        "active_power_consumption": 0.10526315789473684,
-        "usage_cost": 0.1020408163265306
+        "total_cpu_capacity": 0.33755546373373374,
+        "total_memory_capacity": 0.8134645669291338,
+        "total_bandwith_capacity": 0.015656565656565657,
+        "idle_power_consumption": 0.4348888888888889,
+        "active_power_consumption": 0.34210526315789475,
+        "usage_cost": 0.4693877551020408
     },
     {
-        "total_cpu_capacity": 0.7781263328128128,
-        "total_memory_capacity": 0.1911023622047244,
-        "total_bandwith_capacity": 0.43777777777777777,
-        "idle_power_consumption": 0.9122222222222222,
-        "active_power_consumption": 0.9894736842105263,
-        "usage_cost": 0.1020408163265306
+        "total_cpu_capacity": 0.33627516002002006,
+        "total_memory_capacity": 0.92,
+        "total_bandwith_capacity": 0.5921212121212122,
+        "idle_power_consumption": 0.6271111111111111,
+        "active_power_consumption": 0.5736842105263158,
+        "usage_cost": 0.4693877551020408
     },
     {
-        "total_cpu_capacity": 0.9147521143743743,
-        "total_memory_capacity": 0.8633858267716535,
-        "total_bandwith_capacity": 0.38545454545454544,
-        "idle_power_consumption": 0.914888888888889,
-        "active_power_consumption": 0.2315789473684211,
-        "usage_cost": 0.6122448979591837
-    },
-    {
-        "total_cpu_capacity": 0.36630942926926924,
-        "total_memory_capacity": 0.07850393700787402,
-        "total_bandwith_capacity": 0.84,
-        "idle_power_consumption": 0.1408888888888889,
-        "active_power_consumption": 0.5421052631578946,
-        "usage_cost": 0.7959183673469388
-    },
-    {
-        "total_cpu_capacity": 0.13004014997997998,
-        "total_memory_capacity": 0.8780314960629921,
-        "total_bandwith_capacity": 0.151010101010101,
-        "idle_power_consumption": 0.40733333333333327,
+        "total_cpu_capacity": 0.6693398485685687,
+        "total_memory_capacity": 0.3563779527559055,
+        "total_bandwith_capacity": 0.47525252525252526,
+        "idle_power_consumption": 0.898888888888889,
         "active_power_consumption": 0.14210526315789476,
-        "usage_cost": 0.42857142857142855
+        "usage_cost": 0.20408163265306123
     },
     {
-        "total_cpu_capacity": 0.3133957883083083,
-        "total_memory_capacity": 0.9158267716535433,
-        "total_bandwith_capacity": 0.24343434343434345,
-        "idle_power_consumption": 0.8893333333333334,
-        "active_power_consumption": 0.4210526315789474,
-        "usage_cost": 0.5510204081632654
-    },
-    {
-        "total_cpu_capacity": 0.8220122331931933,
-        "total_memory_capacity": 0.8195275590551181,
-        "total_bandwith_capacity": 0.7181818181818181,
-        "idle_power_consumption": 0.37222222222222223,
-        "active_power_consumption": 0.4578947368421053,
-        "usage_cost": 0.836734693877551
-    },
-    {
-        "total_cpu_capacity": 0.5362293029229229,
-        "total_memory_capacity": 0.7833070866141733,
-        "total_bandwith_capacity": 0.7582828282828283,
-        "idle_power_consumption": 0.4724444444444445,
-        "active_power_consumption": 0.9578947368421052,
+        "total_cpu_capacity": 0.2935626006306306,
+        "total_memory_capacity": 0.3126771653543307,
+        "total_bandwith_capacity": 0.3419191919191919,
+        "idle_power_consumption": 0.0011111111111111072,
+        "active_power_consumption": 0.768421052631579,
         "usage_cost": 0.1020408163265306
     },
     {
-        "total_cpu_capacity": 0.5274273246246246,
-        "total_memory_capacity": 0.021732283464566928,
-        "total_bandwith_capacity": 0.7504040404040404,
-        "idle_power_consumption": 0.4408888888888889,
-        "active_power_consumption": 0.17894736842105263,
-        "usage_cost": 0.7346938775510204
+        "total_cpu_capacity": 0.9284720735635635,
+        "total_memory_capacity": 0.2362992125984252,
+        "total_bandwith_capacity": 0.17454545454545456,
+        "idle_power_consumption": 0.17,
+        "active_power_consumption": 0.27894736842105267,
+        "usage_cost": 0.18367346938775514
     },
     {
-        "total_cpu_capacity": 0.6148102253253254,
-        "total_memory_capacity": 0.21362204724409448,
-        "total_bandwith_capacity": 0.8671717171717171,
-        "idle_power_consumption": 0.1308888888888889,
-        "active_power_consumption": 0.37368421052631584,
-        "usage_cost": 0.5918367346938775
+        "total_cpu_capacity": 0.4259109127927928,
+        "total_memory_capacity": 0.3859055118110236,
+        "total_bandwith_capacity": 0.6216161616161616,
+        "idle_power_consumption": 0.3388888888888889,
+        "active_power_consumption": 0.15789473684210528,
+        "usage_cost": 0.6938775510204082
+    },
+    {
+        "total_cpu_capacity": 0.612268055875876,
+        "total_memory_capacity": 0.6823622047244094,
+        "total_bandwith_capacity": 0.5192929292929293,
+        "idle_power_consumption": 0.40088888888888885,
+        "active_power_consumption": 0.8736842105263158,
+        "usage_cost": 0.12244897959183675
     }
 ]

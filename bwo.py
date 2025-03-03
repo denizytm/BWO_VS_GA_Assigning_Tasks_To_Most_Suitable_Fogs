@@ -1,21 +1,25 @@
 from fitness import fitness_func
 import random
 import matplotlib.pyplot as plt
+from types_1 import Task, Fog, Network 
+from typing import List
+from file_functions import load_datas_from_file, save_datas_to_file, delete_files 
 
 class BWO:
 
     pop: list[list[int]]
     prev_pop : list[list[int]] 
     fitness_list : list[float]
+    first_length : int
+    best_widow : list[int]
 
-    def __init__(self, pop_size: int, dim: int, max_epoch: int, cross_p: float, mutation_p: float, canni_p: float,nr : int):
+    def __init__(self, pop_size: int, dim: int, max_epoch: int, reproduction_p: float, mutation_p: float, canni_p: float):
         self.pop_size = pop_size
         self.dim = dim
         self.max_epoch = max_epoch
-        self.cross_p = cross_p
+        self.reproduction_p = reproduction_p
         self.mutation_p = mutation_p
         self.canni_p = canni_p
-        self.nr = nr
 
     # CREATE POPULATION
 
@@ -25,10 +29,10 @@ class BWO:
 
         self.create_fitness_list()
 
-    # ADD TP POPULATION
+    # ADD TO POPULATION
 
-    def add_to_population(self,value):
-        for solution in value:
+    def add_to_population(self,solutions):
+        for solution in solutions:
             self.pop.append(solution)
         self.create_fitness_list()
 
@@ -42,6 +46,16 @@ class BWO:
 
         self.sort_population()
 
+    # SORT DATAS 
+
+    def sort_datas(datas):
+
+        """ TODO """
+
+        sorted_solutions = sorted(zip(self.fitness_list, self.pop), key=lambda x: x[0])
+        self.fitness_list, self.pop = zip(*sorted_solutions)
+        self.fitness_list, self.pop = list(self.fitness_list), list(self.pop)
+
     # SORT POPULATION
 
     def sort_population(self):
@@ -52,27 +66,31 @@ class BWO:
     # CREATE OFFSPRINGS
 
     def create_offspring(self) :
-        if(self.nr <= 1) : raise ValueError("nr must be >= than 1")
-        if(self.nr > len(self.pop)) : raise ValueError("nr must be <= than the population size")
+        nr = int(self.pop_size * self.reproduction_p) 
+        parents = self.pop[0:nr]
+        children = []
+        children_fitness = []
+        
+        a = random.uniform(0.5, 0.8)
 
-        selected_solutions = self.pop[0:self.nr]
-        a = self.cross_p
+        for i in range(nr) :
+            parent1, parent2 = random.sample(parents, 2)
 
-        for i in range(self.nr) :
-            parent1, parent2 = random.sample(selected_solutions, 2)
-
-            y1 : list[int] = []
-            y2 : list[int] = []
-
-            for i in range(self.dim):
+            for i in range(int(self.dim) / 2):
                 offspring_1, offspring_2 = ( a * parent1[i] + (1-a) * parent2[i] ), ( a * parent2[i] + (1-a) * parent1[i] ) 
 
-                y1.append(round(offspring_1))
-                y2.append(round(offspring_2))
+                children.append(round(offspring_1))
+                children.append(round(offspring_2))
+                children_fitness.append(fitness_func(round(offspring_1)))
+                children_fitness.append(fitness_func(round(offspring_2)))
 
-            self.pop.extend([y1,y2])
-            self.fitness_list.extend([fitness_func(y1),fitness_func(y2)])
+            mother_parent = self.get_best_widow([parent1,parent2])
+            father_parent = parent2 if mother_parent == parent1 else parent1
+            parents.remove(father_parent)
 
+
+        self.pop.extend(children)
+        self.fitness_list.extend(children_fitness)
         self.sort_population()  
  
     # REDUCE POPULATION ( CANNIBALISM ) 
@@ -98,14 +116,30 @@ class BWO:
         
         self.add_to_population(mutated_solutions)
 
+    # GET THE BEST WIDOW
+
+    def get_best_widow(self,datas : List[int]) :
+        fitness_list = []
+        for widow in datas:
+            fitness_list.append(fitness_func(widow))
+        
+        best_index = 0
+
+        for i in range(len(datas)) :
+            if(fitness_list[best_index] >= fitness_list[i]) : best_index = i
+
+        return datas[best_index]
+
     # START
 
     def selection(self):
-        self.create_population(0,9)
+        fogs : List[Fog] = load_datas_from_file("fogs.json")
+        self.create_population(0, len(fogs) - 1)
 
-        first_length = len(self.pop)
+        self.first_length = len(self.pop)
 
         global_best = self.fitness_list[0]
+        self.best_widow = self.pop[0]
 
         global_best_history = [global_best]
 
@@ -113,16 +147,18 @@ class BWO:
             if(self.fitness_list[0] < global_best) : 
                 global_best = self.fitness_list[0]
                 global_best_history.append(global_best)
+                self.best_widow = self.pop[0]
             print(f'Approach number : {i}, global best : {global_best}')
-            print(len(self.pop))
+            """ print(len(self.pop)) """
             self.create_offspring()
             self.prev_pop = self.pop
             self.reduce_population()
             self.mutate_pop()
-            if(len(self.pop) > 150) : self.reduce_population()
+            print(len(self.pop))
+            """ if(len(self.pop) > 150) : self.reduce_population()
             if( first_length * 0.45 > len(self.pop) ) :
-                pop = [[random.randint(0, 9) for _ in range(self.dim)] for _ in range(self.pop_size)]
-                self.add_to_population(pop)
+                pop = [[random.randint(0, len(fogs) - 1) for _ in range(self.dim)] for _ in range(self.pop_size)]
+                self.add_to_population(pop)  """ 
 
         plt.plot(range(len(global_best_history)), global_best_history, marker='o', linestyle='-')
 
