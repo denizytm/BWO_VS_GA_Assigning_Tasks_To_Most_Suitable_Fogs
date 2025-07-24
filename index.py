@@ -33,7 +33,7 @@ try:
         "minmax": "min",
     }
 
-    bwo_example = BWO(pop_size=100,dim=len(tasks),max_epoch=3000,reproduction_p=0.8,mutation_p=0.4,canni_p=0.5) 
+    bwo_example = BWO(pop_size=100, dim=len(tasks), max_epoch=3000, reproduction_p=0.25, mutation_p=1, canni_p=0.25)
 
     bwo_example.selection()  
 
@@ -60,16 +60,13 @@ try:
 
     plt.figure(figsize=(10, 5))
 
-    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness")    """
+    plt.plot(epochs, global_best_values, marker='o', linestyle='-', color='b', label="Global Best Fitness")   
 
-    """ plt.plot(epochs, current_best_values, marker='s', linestyle='--', color='r', label="Current Best Fitness")  """
-
-    """ plt.xlabel("Epoch")
+    plt.xlabel("Epoch")
     plt.ylabel("Fitness Değeri")
     plt.title("Global Best Fitness")
     plt.legend()
     plt.grid() 
-
     plt.show()  """
  
 except FileNotFoundError:

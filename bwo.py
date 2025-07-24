@@ -7,10 +7,15 @@ from file_functions import load_datas_from_file, save_datas_to_file, delete_file
 
 class BWO:
 
-    pop: list[list[int]]
+    pop : list[list[int]]
+    pop_fitness : list[float]
+    pop1: list[list[int]]
+    pop1_fitness : list[float]
+    pop2: list[list[int]]
+    pop2_fitness : list[float]
+    pop3: list[list[int]]
+    pop3_fitness : list[float]
     prev_pop : list[list[int]] 
-    fitness_list : list[float]
-    first_length : int
     best_widow : list[int]
 
     def __init__(self, pop_size: int, dim: int, max_epoch: int, reproduction_p: float, mutation_p: float, canni_p: float):
@@ -20,41 +25,44 @@ class BWO:
         self.reproduction_p = reproduction_p
         self.mutation_p = mutation_p
         self.canni_p = canni_p
+        self.fitness_cache = {}
 
     # CREATE POPULATION
 
     def create_population(self, min_val: int, max_val: int):
-        pop = [[random.randint(min_val, max_val) for _ in range(self.dim)] for _ in range(self.pop_size)]
-        self.pop = pop
-
-        self.create_fitness_list()
+        self.pop = [[random.randint(min_val, max_val) for _ in range(self.dim)] for _ in range(self.pop_size)]
 
     # ADD TO POPULATION
 
-    def add_to_population(self,solutions):
-        for solution in solutions:
-            self.pop.append(solution)
-        self.create_fitness_list()
+    def add_to_population(self,data : list,data_to_add : list) -> tuple[list, list] :
+        for solution in data_to_add:
+            data.append(solution)
+        return data, self.create_fitness_list(data)
 
     # CREATE FITNESS LIST
 
-    def create_fitness_list(self):
+    def create_fitness_list(self, data: list) -> list:
         fitness_list = []
-        for solution in self.pop:
-            fitness_list.append(fitness_func(solution))
-        self.fitness_list = fitness_list
+        for solution in data:
+            key = tuple(solution)  # listeyi hashlenebilir hale getir
+            if key in self.fitness_cache:
+                fitness_list.append(self.fitness_cache[key])
+            else:
+                fit = fitness_func(solution)
+                self.fitness_cache[key] = fit
+                fitness_list.append(fit)
+        return fitness_list
 
-        self.sort_population()
 
     # SORT DATAS 
 
-    def sort_datas(datas):
+    def sort_datas(self, datas : list) -> tuple[list,list] :
+        fitness_list = self.create_fitness_list(datas) 
+        sorted_solutions = sorted(zip(fitness_list, datas), key=lambda x: x[0])  
+        sorted_fitness_list, sorted_datas = map(list, zip(*sorted_solutions)) 
 
-        """ TODO """
+        return sorted_datas, sorted_fitness_list 
 
-        sorted_solutions = sorted(zip(self.fitness_list, self.pop), key=lambda x: x[0])
-        self.fitness_list, self.pop = zip(*sorted_solutions)
-        self.fitness_list, self.pop = list(self.fitness_list), list(self.pop)
 
     # SORT POPULATION
 
@@ -63,48 +71,69 @@ class BWO:
         self.fitness_list, self.pop = zip(*sorted_solutions)
         self.fitness_list, self.pop = list(self.fitness_list), list(self.pop)
 
+    def multiply_list_by_float(self, numbers, multiplier):
+        return [num * multiplier for num in numbers]
+
+    def get_cached_fitness(self, solution):
+        key = tuple(solution)
+        if key in self.fitness_cache:
+            return self.fitness_cache[key]
+        else:
+            fit = fitness_func(solution)
+            self.fitness_cache[key] = fit
+            return fit
+
     # CREATE OFFSPRINGS
 
-    def create_offspring(self) :
-        nr = int(self.pop_size * self.reproduction_p) 
-        parents = self.pop[0:nr]
+    def create_offspring(self):
+        MAX_OFFSPRING = 300
+        nr = int(len(self.pop1) * self.reproduction_p)
         children = []
-        children_fitness = []
-        
-        a = random.uniform(0.5, 0.8)
+        children_fitness = []   
 
-        for i in range(nr) :
-            parent1, parent2 = random.sample(parents, 2)
+        for i in range(nr):
+            if len(children) >= MAX_OFFSPRING:
+                break   
 
-            for i in range(int(self.dim) / 2):
-                offspring_1, offspring_2 = ( a * parent1[i] + (1-a) * parent2[i] ), ( a * parent2[i] + (1-a) * parent1[i] ) 
+            parent1, parent2 = random.sample(self.pop1, 2)  
 
-                children.append(round(offspring_1))
-                children.append(round(offspring_2))
-                children_fitness.append(fitness_func(round(offspring_1)))
-                children_fitness.append(fitness_func(round(offspring_2)))
+            for j in range(int(self.dim / 2)):
+                if len(children) >= MAX_OFFSPRING:
+                    break   
 
-            mother_parent = self.get_best_widow([parent1,parent2])
+                child_1 = [random.choice([g1, g2]) for g1, g2 in zip(parent1, parent2)]
+                child_2 = [random.choice([g1, g2]) for g1, g2 in zip(parent2, parent1)] 
+
+                children.append(child_1)
+                children.append(child_2)
+                children_fitness.append(self.get_cached_fitness(child_1))
+                children_fitness.append(self.get_cached_fitness(child_2))
+
+            mother_parent = self.get_best_widow([parent1, parent2])
             father_parent = parent2 if mother_parent == parent1 else parent1
-            parents.remove(father_parent)
+            self.pop1.remove(father_parent) 
 
+        children, children_fitness = self.sort_datas(children)
+        children, children_fitness = self.cannibalism(children, children_fitness)
+        self.pop2.extend(children)
+        self.pop2_fitness.extend(children_fitness)
 
-        self.pop.extend(children)
-        self.fitness_list.extend(children_fitness)
-        self.sort_population()  
- 
-    # REDUCE POPULATION ( CANNIBALISM ) 
+    # CANNIBALISM ( REDUCE POPULATION ) 
 
-    def reduce_population(self):
-        new_length = int(len(self.pop) * self.canni_p)
-        self.pop = self.pop[:new_length]
-        self.fitness_list = self.fitness_list[:new_length]
+    def cannibalism(self, data: list, fitness_list: list) -> tuple[list, list]:
+        new_length = min(int(len(data) * self.canni_p), 300)
+        data = data[:new_length]
+        fitness_list = fitness_list[:new_length]
+        return data, fitness_list
+
+    def adapt_mutation_p(self, epoch):
+        return max(0.05, 0.3 - 0.25 * (epoch / self.max_epoch))
 
     # APPLY MUTATION
 
     def mutate_pop(self):
-        select_number = int(len(self.pop) * self.mutation_p)
-        selected_solutions = random.sample(self.pop, select_number)
+        select_number = int(len(self.pop1) * self.mutation_p)
+        selected_solutions = random.sample(self.pop1, select_number)
 
         mutated_solutions = []
 
@@ -114,14 +143,15 @@ class BWO:
                 solution[i], solution[j] = solution[j], solution[i]
             mutated_solutions.append(solution)
         
-        self.add_to_population(mutated_solutions)
+        self.pop3.extend(mutated_solutions)
+        self.pop3_fitness = self.create_fitness_list(self.pop3)
 
     # GET THE BEST WIDOW
 
     def get_best_widow(self,datas : List[int]) :
         fitness_list = []
         for widow in datas:
-            fitness_list.append(fitness_func(widow))
+            fitness_list.append(self.get_cached_fitness(widow))
         
         best_index = 0
 
@@ -130,35 +160,60 @@ class BWO:
 
         return datas[best_index]
 
+    def adapt_reproduction_p(self, epoch):
+        # lineer azalsın mesela
+        return max(0.3, 0.9 - 0.6 * (epoch / self.max_epoch))
+
+    def adapt_canni_p(self, epoch):
+        return max(0.3, 0.7 - 0.4 * (epoch / self.max_epoch))
+
     # START
 
     def selection(self):
         fogs : List[Fog] = load_datas_from_file("fogs.json")
+        
         self.create_population(0, len(fogs) - 1)
-
-        self.first_length = len(self.pop)
-
-        global_best = self.fitness_list[0]
-        self.best_widow = self.pop[0]
+    
+        self.pop2 = []
+        self.pop2_fitness = self.create_fitness_list(self.pop2)
+        self.pop3 = []
+        self.pop3_fitness = self.create_fitness_list(self.pop3)
+    
+        self.pop, self.pop_fitness = self.sort_datas(self.pop)
+        
+        global_best = self.pop_fitness[0]
 
         global_best_history = [global_best]
 
         for i in range(self.max_epoch):
-            if(self.fitness_list[0] < global_best) : 
-                global_best = self.fitness_list[0]
+            self.reproduction_p = self.adapt_reproduction_p(i)
+            self.mutation_p = self.adapt_mutation_p(i)
+            self.canni_p = self.adapt_canni_p(i)
+            if(self.pop_fitness[0] < global_best) : 
+                global_best = self.pop_fitness[0]
                 global_best_history.append(global_best)
-                self.best_widow = self.pop[0]
             print(f'Approach number : {i}, global best : {global_best}')
-            """ print(len(self.pop)) """
+            
+            nr = int(self.reproduction_p * len(self.pop))
+            
+            self.pop1 = self.pop[:nr]
+            self.pop1_fitness = self.create_fitness_list(self.pop1)
+  
             self.create_offspring()
-            self.prev_pop = self.pop
-            self.reduce_population()
-            self.mutate_pop()
-            print(len(self.pop))
-            """ if(len(self.pop) > 150) : self.reduce_population()
-            if( first_length * 0.45 > len(self.pop) ) :
-                pop = [[random.randint(0, len(fogs) - 1) for _ in range(self.dim)] for _ in range(self.pop_size)]
-                self.add_to_population(pop)  """ 
+            
+            self.mutate_pop() 
+            
+            self.pop = [*self.pop2,*self.pop3]
+            
+            self.pop,self.pop_fitness = self.sort_datas(self.pop)
+            self.pop = self.pop[:100]
+            self.pop_fitness = self.create_fitness_list(self.pop)
+            print(len(self.pop),len(self.pop1),len(self.pop2),len(self.pop3))
+            self.pop2 = []
+            self.pop2_fitness = []
+            self.pop3 = []
+            self.pop3_fitness = []
+            
 
         plt.plot(range(len(global_best_history)), global_best_history, marker='o', linestyle='-')
 

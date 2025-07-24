@@ -16,7 +16,7 @@ U_values = []
 C_values = []
 
 def fitness_func(solution):
-        
+ 
         solution = [math.floor(data) for data in solution]
 
         penalty = 0
